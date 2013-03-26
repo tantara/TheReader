@@ -7,8 +7,8 @@ Requirements
 * Python 2.7.3
 * Django 1.4.1
 Commands:
-	$ python manage.py sql polls
-	$ python manage.py syncdb
+* python manage.py sql polls
+* python manage.py syncdb
 
 === Developer
 Developed by [tantara](https://www.facebook.com/taekmin.kim) & [msgundam00](https://www.facebook.com/dongshik.ham)
