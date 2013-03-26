@@ -3,6 +3,10 @@
 Demo: http://sports.news.naver.com/sports/new/main/index.nhn
 
 === Install
+Requirements
+* Python 2.7.3
+* Django 1.4.1
+Commands:
 	$ python manage.py sql polls
 	$ python manage.py syncdb
 
