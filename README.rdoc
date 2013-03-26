@@ -11,4 +11,4 @@ Commands:
 * python manage.py syncdb
 
 === Developer
-Developed by [tantara](https://www.facebook.com/taekmin.kim) & [msgundam00](https://www.facebook.com/dongshik.ham)
+Developed by {tantara}[https://www.facebook.com/taekmin.kim] & {msgundam00}[https://www.facebook.com/dongshik.ham]
