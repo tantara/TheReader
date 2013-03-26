@@ -1,0 +1,10 @@
+=== 야구 중계 읽어주는 남자
+네이버 프로야구 중계를 읽어주는 웹 어플리케이션
+Demo: http://sports.news.naver.com/sports/new/main/index.nhn
+
+=== Install
+	$ python manage.py sql polls
+	$ python manage.py syncdb
+
+=== Developer
+Developed by [tantara](https://www.facebook.com/taekmin.kim) & [msgundam00](https://www.facebook.com/dongshik.ham)
