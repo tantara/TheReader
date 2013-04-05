@@ -1,6 +1,14 @@
 # Django settings for TheReader project.
 # -*- coding: utf-8 -*-
 
+# For relative path
+import os
+import django
+
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+# END - For relative path
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -13,8 +21,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-		#'NAME': 'D:\TheReader\db\sqlite3.db', # Or path to database file if using sqlite3.
-		'NAME': '/var/www/TheReader/db/sqlite3.db', # Or path to database file if using sqlite3.
+		'NAME': os.path.join(SITE_ROOT, 'db') + '/sqlite3.db', # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -112,7 +119,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/var/www/TheReader/templates'
+    os.path.join(SITE_ROOT, 'templates')
 )
 
 INSTALLED_APPS = (
