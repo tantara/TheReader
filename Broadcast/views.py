@@ -1,1 +1,10 @@
-# Create your views here.
+from django.http import HttpResponse
+from django.shortcuts import render, render_to_response
+
+def show(request):
+	if request.method == "POST":
+		form = request.POST
+		url = form['url']
+		return render_to_response('broadcast/show.html', {'url': url})
+	else:
+		return HttpResponse(status=500)

@@ -1,0 +1,12 @@
+{% extends 'layouts/application.html' %}
+{% block active_home %}active{% endblock %}
+
+{% block content %}
+<img src="/static/images/2013.png" alt="프로야구 2013" />
+<h1 class="font-white">중계 읽어주는 남자</h1>
+<p><form action="/broadcast/" method="post">
+	{% csrf_token %}
+	<input type="text" name="url" class="span8" placeholder="http://sports.news.naver.com/gameCenter/textRelay.nhn?category=kbo&gameId=20130407HTLT0" required />
+</form></p>
+<span class="help-block font-white">네이버 문자중계 페이지 <a href="http://sports.news.naver.com/gameCenter/textRelay.nhn?category=kbo&gameId=20130407HTLT0" target="_blank" data-toggle="popover" data-title="주소란?" data-content="네이버 문자중계 페이지 상단에 있는 URL을 말합니다." data-trigger="hover" data-placement="bottom">주소</a>를 입력해주세요.</span>
+{% endblock %}
