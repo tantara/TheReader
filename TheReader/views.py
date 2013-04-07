@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
-import parser
 
 def home(request):
 	return render_to_response('main/home.html', context_instance=RequestContext(request))

@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
+import nsd_utils.nsd_parser
 
 def show(request):
 	if request.method == "POST":
