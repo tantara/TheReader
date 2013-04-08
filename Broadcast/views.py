@@ -7,6 +7,7 @@ def show(request):
 		form = request.POST
 		url = form['url']
 		nsdData = UrlParser(url)
+		nsdData.parsingLiveTexts()
 		return render_to_response('broadcast/show.html', {'url': url, 'nsdData': nsdData})
 	else:
 		return HttpResponse(status=500)
