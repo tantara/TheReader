@@ -6,7 +6,7 @@ def show(request):
 	if request.method == "POST":
 		form = request.POST
 		url = form['url']
-		nsd_data = UrlParser(url)
-		return render_to_response('broadcast/show.html', {'url': url})
+		nsdData = UrlParser(url)
+		return render_to_response('broadcast/show.html', {'url': url, 'nsdData': nsdData})
 	else:
 		return HttpResponse(status=500)
