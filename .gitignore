@@ -1,4 +1,4 @@
 *.pyc
 *.swp
 
-/db/sqlite3.db
+/TheReader/db/sqlite3.db
