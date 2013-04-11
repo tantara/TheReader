@@ -6,8 +6,11 @@ import operator
 class UrlParser: # Url Parser
 	## naver sports data url parser
 	def __init__(self, Url):
-		l = len(Url)
-		gameId = Url[l-13:]
+		self.liveTexts = []
+		self.seqno = 0
+
+		l = Url.index('gameId')
+		gameId = Url[l+7:l+20]
 		year = gameId[:4]
 		month = gameId[4:6]
 
@@ -16,12 +19,12 @@ class UrlParser: # Url Parser
 		x = data.index('{"games')
 		y = data.index(');</script>')
 		self.nsdDic = ast.literal_eval(data[x:y])
-		self.liveTexts = []
-		print self.nsdDic["gameInfo"]["aFullName"]
-
+	
+	## test function
 	def testData(self):
 		print self.nsdDic["relayTexts"]["1"][3]["seqno"]
 
+	## live Texts sort by seqno
 	def parsingLiveTexts(self):
 		l = len(self.nsdDic["relayTexts"])
 		l = l - 3
@@ -33,3 +36,19 @@ class UrlParser: # Url Parser
 
 		self.liveTexts.sort(key=operator.itemgetter('seqno'))
 		print self.liveTexts
+
+	## parsing by (text, flag) list after readed seqno
+	def matchingTexts(self):
+		def matchingText(liveText):
+			textData = {'text': liveText.decode('utf-8'), 'flag': 1}
+			return textData
+
+		l = len(self.liveTexts)
+		voiceList = []
+
+		for i in xrange(self.seqno+1, l):
+			voiceList.append(matchingText(self.liveTexts[i]['liveText']))
+
+		self.seqno = l
+		return voiceList
+			
