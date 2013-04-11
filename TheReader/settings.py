@@ -13,7 +13,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('tantara', 'tantara@wafflestudio.com'),
+#    ('tantara', 'tantara@wafflestudio.com'),
 )
 
 MANAGERS = ADMINS
