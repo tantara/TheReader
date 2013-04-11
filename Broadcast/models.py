@@ -38,6 +38,7 @@ class GameLog(models.Model):
 	live_text = models.CharField(max_length=200)
 	text_style = models.IntegerField(default=0)
 	btop = models.IntegerField(default=0)
+	flag = models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return self.live_text
