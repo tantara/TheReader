@@ -2,6 +2,7 @@ import urllib2
 import urllib
 import ast
 import operator
+from Broadcast.models import Game,GameLog
 
 class UrlParser: # Url Parser
 	## naver sports data url parser
@@ -19,7 +20,7 @@ class UrlParser: # Url Parser
 		x = data.index('{"games')
 		y = data.index(');</script>')
 		self.nsdDic = ast.literal_eval(data[x:y])
-	
+
 	## test function
 	def testData(self):
 		print self.nsdDic["relayTexts"]["1"][3]["seqno"]
