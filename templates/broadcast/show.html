@@ -1,13 +1,67 @@
 {% extends 'layouts/application.html' %}
 
 {% block content %}
+<style type="text/css">
+	p.speech-text:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+</style>
 <script type="text/javascript">
+	function html5_audio(){
+		var a = document.createElement('audio');
+		return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
+	}
+	 
+	var play_html5_audio = false;
+	if(html5_audio()) play_html5_audio = true;
+	 
+	function play_sound(url){
+		if(play_html5_audio){
+			var snd = new Audio(url);
+			snd.load();
+			snd.play();
+		}else{
+			$("#sound").remove();
+			var sound = $("<embed id='sound' hidden='true' type='audio/mpeg' />");
+			sound.attr('src', url);
+			sound.attr('loop', false);
+			sound.attr('autostart', true);
+			$('body').append(sound);
+		}
+	}
+	var cnt = 1;
+	function readme(txt){
+		txt = '"' + txt.trim() + '"';
+		txt = txt.replace(/1/g, '일');
+		txt = txt.replace(/2/g, '이');
+		txt = txt.replace(/3/g, '삼');
+		txt = txt.replace(/4/g, '사');
+		txt = txt.replace(/5/g, '오');
+		txt = txt.replace(/6/g, '육');
+		txt = txt.replace(/7/g, '칠');
+		txt = txt.replace(/8/g, '팔');
+		txt = txt.replace(/9/g, '구');
+		//play_sound("http://translate.google.com/translate_tts?q="+encodeURIComponent(txt)+"&tl=ko&title=" + cnt++);
+		play_sound("http://api.microsofttranslator.com/v2/http.svc/Speak?language=ko&format=audio/mp3&options=MaxQuality&appid=TbQzGVxpxBRGTVkc7rsy1s1qFtbwEsN7VYPWCaWbgKDM*&text="+encodeURIComponent(txt));
+	}
 	$(document).ready(function() {
-		$.post('/broadcast/reload', {url: '{{url}}'}, function(data) {
-			console.log(data);
-		});
+		$.post('/broadcast/reload', {url: '{{url}}'}, function(json) {
+			var btop = ["말", "초"];
+			var html = [];
+			var alertType = ["alert-error", "alert-info"];
+			$.each(json, function(i, e) {
+				var text = '<p class="speech-text alert ' + alertType[e.btop] + '"><i class="icon-play"></i><span class="live-text">' +e.inn + "회" + btop[e.btop] + " " +  e.liveText + "</span></p>";
+				html.push(text);
+			});
+			$('#broadcast').html(html.join(""));	
+			$('p.speech-text').click(function() {
+				readme($(this).children('span.live-text').text());
+			});
+		}, "json");
 	});
 </script>
 <iframe src="{{ url }}" style="width: 100%; min-height: 700px; background-color: white"></iframe>
 <p class="font-white">주소: <a href="{{ url }}" target="_blank">{{ url }}</a></p>
+<div id="broadcast"</div>
 {% endblock %}
