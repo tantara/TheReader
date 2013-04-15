@@ -6,7 +6,6 @@ class Game(models.Model):
 
 	## Naver Field
 	game_id = models.CharField("Naver gameId", max_length=200)
-	date = models.CharField("Naver gdate", max_length=200)
 
 	def __unicode__(self):
 		return self.url

@@ -20,6 +20,9 @@ class UrlParser: # Url Parser
 		x = data.index('{"games')
 		y = data.index(');</script>')
 		self.nsdDic = ast.literal_eval(data[x:y])
+	
+	def haveGameDB(self, gameId):
+		GameList = Game.objects.all() 
 
 	## test function
 	def testData(self):
