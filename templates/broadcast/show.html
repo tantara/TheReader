@@ -46,7 +46,13 @@
 		play_sound("http://api.microsofttranslator.com/v2/http.svc/Speak?language=ko&format=audio/mp3&options=MaxQuality&appid=TbQzGVxpxBRGTVkc7rsy1s1qFtbwEsN7VYPWCaWbgKDM*&text="+encodeURIComponent(txt));
 	}
 	$(document).ready(function() {
-		$.post('/broadcast/reload', {url: '{{url}}'}, function(json) {
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+			alert('mobile');
+		} else {
+			alert('desktop');
+		}
+		$.post('/broadcast/reload', {gameId: '{{game.pk}}', seqno: 1}, function(json) {
+			console.log(json);
 			var btop = ["말", "초"];
 			var html = [];
 			var alertType = ["alert-error", "alert-info"];
@@ -61,7 +67,8 @@
 		}, "json");
 	});
 </script>
-<iframe src="{{ url }}" style="width: 100%; min-height: 700px; background-color: white"></iframe>
-<p class="font-white">주소: <a href="{{ url }}" target="_blank">{{ url }}</a></p>
+<p class="font-white">주소: <a href="{{game.url}}" target="_blank">{{game.url}}</a></p>
+<p class="font-white">문자중계(큰창): <a href="http://sports.news.naver.com/gameCenter/textRelay.nhn?category=kbo&gameId={{game.game_id}}" target="_blank">http://sports.news.naver.com/gameCenter/textRelay.nhn?category=kbo&gameId={{game.game_id}}</a></p>
+<p class="font-white">문자중계(작은창):: <a href="http://sports.news.naver.com/gameCenter/miniTextRelay.nhn?category=kbo&date={{game.game_id|slice:":8"}}&gameId={{game.game_id}}" target="_blank">http://sports.news.naver.com/gameCenter/miniTextRelay.nhn?category=kbo&date={{game.game_id|slice:":8"}}&gameId={{game.game_id}}</a></p>
 <div id="broadcast"</div>
 {% endblock %}

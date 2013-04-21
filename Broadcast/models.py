@@ -3,9 +3,10 @@ from django.db import models
 class Game(models.Model):
 	## Custom Field
 	url = models.CharField(max_length=200)
+	cur_seqno = models.IntegerField(default=0)
 
 	## Naver Field
-	game_id = models.CharField("Naver gameId", max_length=200)
+	game_id = models.CharField("Naver gameId", max_length=200, primary_key=True)
 
 	def __unicode__(self):
 		return self.url
