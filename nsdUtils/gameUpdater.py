@@ -10,9 +10,9 @@ class GameUpdater: # Gmae db Updater
 	def __init__(self, game):
 		self.game = game 
 			
-		while not checkGameEnd():
-			updateNsdDic()
-			updateGameLog()
+		while not self.checkGameEnd():
+			self.updateNsdDic()
+			self.updateGameLog()
 	
 	## update naver sports data dictonary
 	def updateNsdDic(self):
@@ -42,7 +42,7 @@ class GameUpdater: # Gmae db Updater
 
 		liveTexts.sort(key=operator.itemgetter('seqno'))
 
-		for text in self.liveTexts:
+		for text in liveTexts:
 			if text['seqno'] > self.game.cur_seqno:
 				newLog = GameLog()
 				newLog.game = self.game
@@ -63,6 +63,7 @@ class GameUpdater: # Gmae db Updater
 
 	## check Game End
 	def checkGameEnd(self):
+		print self.game
 		game = self.game
 		seqNo = game.cur_seqno
 
