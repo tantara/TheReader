@@ -3,6 +3,7 @@ import urllib2
 import urllib
 import ast
 import operator
+import time
 from Broadcast.models import Game,GameLog
 
 class GameUpdater: # Gmae db Updater
@@ -11,8 +12,11 @@ class GameUpdater: # Gmae db Updater
 		self.game = game 
 			
 		while not self.checkGameEnd():
-			self.updateNsdDic()
+			print "sleep1"
+			self.updateNjdDic()
 			self.updateGameLog()
+			time.sleep(5)
+			print "sleep"
 	
 	## update naver sports data dictonary
 	def updateNsdDic(self):
@@ -38,7 +42,7 @@ class GameUpdater: # Gmae db Updater
 
 		liveTexts = []
 		for i in xrange(curInn, l):
-			liveTexts += liveTexts + self.nsdDic['relayTexts'][str(i)]
+			liveTexts += self.nsdDic['relayTexts'][str(i)]
 
 		liveTexts.sort(key=operator.itemgetter('seqno'))
 
@@ -70,4 +74,4 @@ class GameUpdater: # Gmae db Updater
 		if seqNo == 0:
 			return False
 
-		return GameLog.objects.filter(game=game, seqno=seqNo).live_text != u'경기종료'
+		return GameLog.objects.filter(game=game, seqno=seqNo)[0].live_text != u'경기종료'
