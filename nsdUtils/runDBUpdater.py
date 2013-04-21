@@ -8,4 +8,4 @@ def runDBUpdater(url):
 		gameId = url[l+7:l+20]
 		g = Game(game_id=gameId)
 		g.save()
-		thread.start_new_thread(GameUpdater, (g,))
+		thread.start_new_thread(GameUpdater, (url,))
