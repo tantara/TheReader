@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
-from nsdUtils.nsdParser import UrlParser
+import nsdUtils.runDBUpdater as dbUpdater
 import json
 from django.views.decorators.csrf import csrf_exempt
 
@@ -15,7 +15,7 @@ def show(request):
 def reload(request):
 	if request.method == "POST":
 		url = request.POST['url']
-		nsdData = UrlParser(url)
+		dbUpdater.runDBUpdater(url)
 		nsdData.parsingLiveTexts()
 		return HttpResponse(json.dumps(nsdData.liveTexts))
 	else:
