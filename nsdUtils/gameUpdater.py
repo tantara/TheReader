@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import urllib2
 import urllib
 import ast
@@ -6,19 +7,8 @@ from Broadcast.models import Game,GameLog
 
 class GameUpdater: # Gmae db Updater
 	## naver sports data url parser & save Game if not exists
-	def __init__(self, Url):
-		l = Url.index('gameId')
-		gameId = Url[l+7:l+20]
-
-		checkExists = Game.objects.get_or_create(game_id=gameId)
-		self.game = checkExists[0]
-
-		if checkExists[1]:
-			year = gameId[:4]
-			month = gameId[4:6]
-
-			self.game.url = "http://sportsdata.naver.com/ndata//kbo/%s/%s/%s.nsd" % (year, month, gameId)
-			self.game.save()
+	def __init__(self, game):
+		self.game = game 
 			
 		while not checkGameEnd():
 			updateNsdDic()
