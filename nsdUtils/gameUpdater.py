@@ -3,6 +3,7 @@ import urllib2
 import urllib
 import ast
 import operator
+import time
 from Broadcast.models import Game,GameLog
 
 class GameUpdater: # Gmae db Updater
@@ -13,6 +14,7 @@ class GameUpdater: # Gmae db Updater
 		while not self.checkGameEnd():
 			self.updateNsdDic()
 			self.updateGameLog()
+			time.sleep(5)
 	
 	## update naver sports data dictonary
 	def updateNsdDic(self):
@@ -55,6 +57,7 @@ class GameUpdater: # Gmae db Updater
 				curSeqno = text['seqno']
 		
 		self.game.cur_seqno = curSeqno
+
 		self.game.save()
 
 	## test function
