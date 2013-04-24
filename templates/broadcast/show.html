@@ -43,13 +43,14 @@
 		txt = txt.replace(/8/g, '팔');
 		txt = txt.replace(/9/g, '구');
 		//play_sound("http://translate.google.com/translate_tts?q="+encodeURIComponent(txt)+"&tl=ko&title=" + cnt++);
-		play_sound("http://api.microsofttranslator.com/v2/http.svc/Speak?language=ko&format=audio/mp3&options=MaxQuality&appid=TbQzGVxpxBRGTVkc7rsy1s1qFtbwEsN7VYPWCaWbgKDM*&text="+encodeURIComponent(txt));
+		var appId = 'T9FY8I4OP1GLvVZtmQS6JG5m2ovPcyxTA_WqDUPKn9Wk*';
+		play_sound("http://api.microsofttranslator.com/v2/http.svc/Speak?language=ko&format=audio/mp3&options=MaxQuality&appid=" + appId + "&text="+encodeURIComponent(txt));
 	}
 	$(document).ready(function() {
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-			alert('mobile');
+			console.log('mobile');
 		} else {
-			alert('desktop');
+			console.log('desktop');
 		}
 		$.post('/broadcast/reload', {gameId: '{{game.pk}}', seqno: 1}, function(json) {
 			console.log(json);
@@ -57,7 +58,7 @@
 			var html = [];
 			var alertType = ["alert-error", "alert-info"];
 			$.each(json, function(i, e) {
-				var text = '<p class="speech-text alert ' + alertType[e.btop] + '"><i class="icon-play"></i><span class="live-text">' +e.inn + "회" + btop[e.btop] + " " +  e.liveText + "</span></p>";
+				var text = '<p class="speech-text alert ' + alertType[e.fields.btop] + '"><i class="icon-play"></i><span class="live-text">' +e.fields.inn + "회" + btop[e.fields.btop] + " " +  e.fields.live_text + "</span></p>";
 				html.push(text);
 			});
 			$('#broadcast').html(html.join(""));	
