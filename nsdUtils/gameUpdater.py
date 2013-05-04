@@ -13,7 +13,7 @@ class GameUpdater: # Gmae db Updater
 			
 		while not self.checkGameEnd():
 			print "sleep1"
-			self.updateNjdDic()
+			self.updateNsdDic()
 			self.updateGameLog()
 			time.sleep(5)
 	

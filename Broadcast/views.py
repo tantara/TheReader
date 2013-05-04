@@ -29,8 +29,8 @@ def reload(request):
 	if request.method == "POST":
 		gameId = request.POST['gameId']
 		seqno = request.POST['seqno']
-		gameLog = GameLog.object.filter(game_id = gameId, seqno__gt = seqno)
-		json = serializers.serialize('json', gameLog, fields=('seqno','live_text'))
+		gameLog = GameLog.objects.filter(game_id = gameId, seqno__gt = seqno)
+		json = serializers.serialize('json', gameLog, fields=('seqno','live_text','btop','inn'))
 		return HttpResponse(json)
 	else:
 		return HttpResponse(status=500)
