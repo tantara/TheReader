@@ -86,11 +86,11 @@ class GameUpdater: # Gmae db Updater
 			elif bool(re.search(u'\d루주자', liveText)):
 				position = int(re.findall('\d', liveText)[0])
 				if u'진루' in livetext:
-					return 21100 + position * 10 + int(re.findall('\d', liveText)[1])
+					return 21100 + position * 10 + int(re.findall('\d', liveText)[1])	#10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 				elif u'홈인' in liveText:
-					return 21104 + position * 10
+					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 				elif u'태그아웃' in liveText:
-					return 2230 + position
+					return 2230 + position #1의자리는 기존에 있던 베이스
 			elif u'안타' in liveText:
 				return 121
 			elif u'2루타' in liveText:
@@ -123,14 +123,14 @@ class GameUpdater: # Gmae db Updater
 				return 310 + int(re.findall('\d', liveText)[0])
 			elif bool(re.search(u'\d루주자', liveText)):
 				position = int(re.findall('\d', liveText)[0])
-				if u'도루실패' in liveText:
-					return 2220 + position
-				elif u'도루' in liveText:
-					return 2130 + position
+				if u'도루실패' in liveText: 
+					return 2220 + position #1의자리는 기존에 있던 베이스
+				elif u'도루' in liveText: 
+					return 2130 + position #1의자리는 기존에 있던 베이스
 				elif u'진루' in livetext:
-					return 21100 + position * 10 + int(re.findall('\d', liveText)[1])
+					return 21100 + position * 10 + int(re.findall('\d', liveText)[1]) #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 				elif u'홈인' in liveText:
-					return 21104 + position * 10
+					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 			elif u'볼넷' in liveText:
 				return 125
 			elif u'몸에 맞는 볼' in liveText:
