@@ -93,6 +93,8 @@ class GameUpdater: # Gmae db Updater
 					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 				elif '태그아웃' in liveText:
 					return 2230 + position #1의자리는 기존에 있던 베이스
+				else:
+					return 0
 			elif '안타' in liveText:
 				return 121
 			elif '2루타' in liveText:
@@ -133,6 +135,8 @@ class GameUpdater: # Gmae db Updater
 					return 21100 + position * 10 + int(re.findall('\d', liveText)[1]) #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 				elif '홈인' in liveText:
 					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
+				else:
+					return 0
 			elif '볼넷' in liveText:
 				return 125
 			elif '몸에 맞는 볼' in liveText:
