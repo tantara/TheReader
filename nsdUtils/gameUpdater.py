@@ -83,7 +83,7 @@ class GameUpdater: # Gmae db Updater
 	def parseFlag(self, liveText):
 		if self.hitFlag:
 			if bool(re.search('\d번타자', liveText)):
-				self.hitFlag = False;
+				self.hitFlag = False
 				return 310 + int(re.findall('\d', liveText)[0])
 			elif bool(re.search('\d루주자', liveText)):
 				position = int(re.findall('\d', liveText)[0])
