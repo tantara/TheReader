@@ -24,7 +24,7 @@ class GameUpdater: # Gmae db Updater
 
 		data = urllib2.urlopen(url).read()
 		x = data.index('{"games')
-		y = data.index(');</script>')
+		y = data.index(')</script>')
 		self.nsdDic = ast.literal_eval(data[x:y])
 
 	## update GameLog by game
@@ -78,76 +78,76 @@ class GameUpdater: # Gmae db Updater
 		if seqNo == 0:
 			return False
 
-		return GameLog.objects.filter(game=game, seqno=seqNo)[0].live_text != u'경기종료'
+		return GameLog.objects.filter(game=game, seqno=seqNo)[0].live_text != '경기종료'
 
 	def parseFlag(self, liveText):
 		if self.hitFlag:
-			if bool(re.search(u'\d번타자', liveText)):
-				self.hitFlag = False;
+			if bool(re.search('\d번타자', liveText)):
+				self.hitFlag = False
 				return 310 + int(re.findall('\d', liveText)[0])
-			elif bool(re.search(u'\d루주자', liveText)):
+			elif bool(re.search('\d루주자', liveText)):
 				position = int(re.findall('\d', liveText)[0])
-				if u'진루' in livetext:
+				if '진루' in liveText:
 					return 21100 + position * 10 + int(re.findall('\d', liveText)[1])	#10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
-				elif u'홈인' in liveText:
+				elif '홈인' in liveText:
 					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
-				elif u'태그아웃' in liveText:
+				elif '태그아웃' in liveText:
 					return 2230 + position #1의자리는 기존에 있던 베이스
-			elif u'안타' in liveText:
+			elif '안타' in liveText:
 				return 121
-			elif u'2루타' in liveText:
+			elif '2루타' in liveText:
 				return 122
-			elif u'3루타' in liveText:
+			elif '3루타' in liveText:
 				return 123
-			elif u'홈런' in liveText:
+			elif '홈런' in liveText:
 				return 124
-			elif u'희생번트' in liveText:
+			elif '희생번트' in liveText:
 				return 128
-			elif u'실책으로 출루' in liveText:
+			elif '실책으로 출루' in liveText:
 				return 129
-			elif u'플라이' in liveText:
+			elif '플라이' in liveText:
 				return 132
-			elif u'땅볼' in liveText:
+			elif '땅볼' in liveText:
 				return 133
-			elif u'병살타' in liveText:
+			elif '병살타' in liveText:
 				return 134
-##			elif u'삼중살' in liveText: 아직 모름.
+##			elif '삼중살' in liveText: 아직 모름.
 ##				return 135
-			elif u'희생번트' in liveText:
+			elif '희생번트' in liveText:
 				return 136
 			else:
 				return 0
 		else:
-			if u'타격' in liveText:
-				self.hitFlag = True;
+			if '타격' in liveText:
+				self.hitFlag = True
 				return 0
-			elif bool(re.search(u'\d번타자', liveText)):
+			elif bool(re.search('\d번타자', liveText)):
 				return 310 + int(re.findall('\d', liveText)[0])
-			elif bool(re.search(u'\d루주자', liveText)):
+			elif bool(re.search('\d루주자', liveText)):
 				position = int(re.findall('\d', liveText)[0])
-				if u'도루실패' in liveText: 
+				if '도루실패' in liveText: 
 					return 2220 + position #1의자리는 기존에 있던 베이스
-				elif u'도루' in liveText: 
+				elif '도루' in liveText: 
 					return 2130 + position #1의자리는 기존에 있던 베이스
-				elif u'진루' in livetext:
+				elif '진루' in liveText:
 					return 21100 + position * 10 + int(re.findall('\d', liveText)[1]) #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
-				elif u'홈인' in liveText:
+				elif '홈인' in liveText:
 					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
-			elif u'볼넷' in liveText:
+			elif '볼넷' in liveText:
 				return 125
-			elif u'몸에 맞는 볼' in liveText:
+			elif '몸에 맞는 볼' in liveText:
 				return 126
-			elif u'스트라이크 낫아웃' in liveText:
+			elif '스트라이크 낫아웃' in liveText:
 				return 127
-			elif u'스트라이크' in liveText:
+			elif '스트라이크' in liveText:
 				return 111
-			elif u'볼' in liveText:
+			elif '볼' in liveText:
 				return 112
-			elif u'파울' in liveText:
+			elif '파울' in liveText:
 				return 113
-			elif u'헛스윙' in liveText:
+			elif '헛스윙' in liveText:
 				return 114
-			elif u'삼진 아웃' in liveText:
+			elif '삼진 아웃' in liveText:
 				return 131
 			else:
-				return 0;
+				return 0

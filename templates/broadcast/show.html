@@ -46,13 +46,11 @@
 		var appId = 'T9FY8I4OP1GLvVZtmQS6JG5m2ovPcyxTA_WqDUPKn9Wk*';
 		play_sound("http://api.microsofttranslator.com/v2/http.svc/Speak?language=ko&format=audio/mp3&options=MaxQuality&appid=" + appId + "&text="+encodeURIComponent(txt));
 	}
-	$(document).ready(function() {
-		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-			console.log('mobile');
-		} else {
-			console.log('desktop');
-		}
-		$.post('/broadcast/reload', {gameId: '{{game.pk}}', seqno: 1}, function(json) {
+
+	var seqno = 1;
+	function reload() {
+		console.log(seqno);
+		$.post('/broadcast/reload', {gameId: '{{game.pk}}', seqno: seqno}, function(json) {
 			console.log(json);
 			var btop = ["말", "초"];
 			var html = [];
@@ -60,12 +58,23 @@
 			$.each(json, function(i, e) {
 				var text = '<p class="speech-text alert ' + alertType[e.fields.btop] + '"><i class="icon-play"></i><span class="live-text">' +e.fields.inn + "회" + btop[e.fields.btop] + " " +  e.fields.live_text + "</span></p>";
 				html.push(text);
+				if(e.fields.seqno > seqno) seqno = e.fields.seqno;
 			});
-			$('#broadcast').html(html.join(""));	
+			$('#broadcast').append(html.join(""));	
 			$('p.speech-text').click(function() {
 				readme($(this).children('span.live-text').text());
 			});
 		}, "json");
+	}
+	$(document).ready(function() {
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+			console.log('mobile');
+		} else {
+			console.log('desktop');
+		}
+
+		reload();
+		setInterval(reload, 5000);
 	});
 </script>
 <p class="font-white">주소: <a href="{{game.url}}" target="_blank">{{game.url}}</a></p>
