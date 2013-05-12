@@ -46,6 +46,8 @@ class GameUpdater: # Gmae db Updater
 
 		liveTexts.sort(key=operator.itemgetter('seqno'))
 
+		self.hitFlag = False
+
 		for text in liveTexts:
 			if text['seqno'] > self.game.cur_seqno:
 				newLog = GameLog()
