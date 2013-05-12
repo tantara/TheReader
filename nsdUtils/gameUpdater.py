@@ -129,7 +129,7 @@ class GameUpdater: # Gmae db Updater
 					return 2220 + position #1의자리는 기존에 있던 베이스
 				elif '도루' in liveText: 
 					return 2130 + position #1의자리는 기존에 있던 베이스
-				elif '진루' in livetext:
+				elif '진루' in liveText:
 					return 21100 + position * 10 + int(re.findall('\d', liveText)[1]) #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
 				elif '홈인' in liveText:
 					return 21104 + position * 10 #10의자리는 기존의 있던 베이스 1의자리는 진루한 베이스
