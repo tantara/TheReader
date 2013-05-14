@@ -43,7 +43,8 @@
 		txt = txt.replace(/8/g, '팔');
 		txt = txt.replace(/9/g, '구');
 		//play_sound("http://translate.google.com/translate_tts?q="+encodeURIComponent(txt)+"&tl=ko&title=" + cnt++);
-		var appId = 'T9FY8I4OP1GLvVZtmQS6JG5m2ovPcyxTA_WqDUPKn9Wk*';
+		//var appId = 'T9FY8I4OP1GLvVZtmQS6JG5m2ovPcyxTA_WqDUPKn9Wk*';
+		var appId = 'YOA0Drv23QNT5cOoXPhtD8BvmmCKq+1ekY8su5ZIgsY';
 		play_sound("http://api.microsofttranslator.com/v2/http.svc/Speak?language=ko&format=audio/mp3&options=MaxQuality&appid=" + appId + "&text="+encodeURIComponent(txt));
 	}
 
