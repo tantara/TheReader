@@ -71,14 +71,13 @@ class GameUpdater: # Gmae db Updater
 
 	## check Game End
 	def checkGameEnd(self):
-		print self.game
 		game = self.game
 		seqNo = game.cur_seqno
 
 		if seqNo == 0:
 			return False
 
-		return GameLog.objects.filter(game=game, seqno=seqNo)[0].live_text != '경기종료'
+		return GameLog.objects.filter(game=game, seqno=seqNo)[0].live_text == '경기종료'
 
 	def parseFlag(self, liveText):
 		if self.hitFlag:
