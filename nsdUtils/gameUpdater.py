@@ -96,6 +96,8 @@ class GameUpdater: # Gmae db Updater
 					return 0
 			elif '안타' in liveText:
 				return 121
+			elif '1루타' in liveText:
+				return 121
 			elif '2루타' in liveText:
 				return 122
 			elif '3루타' in liveText:
