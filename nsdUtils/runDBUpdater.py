@@ -14,7 +14,7 @@ def runDBUpdater(url):
 		g = Game(game_id=gameId)
 		g.url = "http://sportsdata.naver.com/ndata//kbo/%s/%s/%s.nsd" % (year, month, gameId)
 		g.save()
-		gameUpdater = threading.Thread(target=GameUpdater, args=(g))
+		gameUpdater = threading.Thread(target=GameUpdater, args=(g,))
 		
 		gameUpdater.start()		
 
