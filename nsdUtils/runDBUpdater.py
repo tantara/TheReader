@@ -5,8 +5,9 @@ from nsdUtils.gameUpdater import GameUpdater
 def runDBUpdater(url):
 	l = url.index('gameId')
 	gameId = url[l+7:l+20]
+	threadMap = {}
 
-	if not Game.objects.filter(game_id=gameId):
+	if not gameId in threadMap.keys():
 		year = gameId[:4]
 		month = gameId[4:6]
 
@@ -17,5 +18,10 @@ def runDBUpdater(url):
 		
 		gameUpdater.start()		
 
-	if not gameUpdater.isAlive():
-		gameUpdater.start()
+		threadMap[gameId] = gameUpdater
+
+	for key in threadMap:
+		updater = threadMap[key]
+
+		if not updater.isAlive():
+			del threadMap[key]	
