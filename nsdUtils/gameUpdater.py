@@ -49,17 +49,19 @@ class GameUpdater: # Gmae db Updater
 		self.hitFlag = False
 
 		for text in liveTexts:
-			if text['seqno'] > self.game.cur_seqno:
-				newLog = GameLog()
-				newLog.game = self.game
-				newLog.inn = text['inn']
-				newLog.seqno = text['seqno']
-				newLog.live_text = text['liveText']
-				newLog.btop = text['btop']
-				newLog.flag = self.parseFlag(text['liveText'])
-				newLog.save()
+			seqno = text['seqno']
+			if seqno > self.game.cur_seqno:
+				if not GameLog.objects.filter(game=self.game, seqno=seqno): 
+					newLog = GameLog()
+					newLog.game = self.game
+					newLog.inn = text['inn']
+					newLog.seqno = seqno
+					newLog.live_text = text['liveText']
+					newLog.btop = text['btop']
+					newLog.flag = self.parseFlag(text['liveText'])
+					newLog.save()
 
-				curSeqno = text['seqno']
+				curSeqno = seqno
 		
 		self.game.cur_seqno = curSeqno
 
@@ -77,7 +79,7 @@ class GameUpdater: # Gmae db Updater
 		if seqNo == 0:
 			return False
 
-		return GameLog.objects.filter(game=game, seqno=seqNo)[0].live_text == '경기종료'
+		return GameLog.objects.get(game=game, seqno=seqNo).live_text == '경기종료'
 
 	def parseFlag(self, liveText):
 		if self.hitFlag:

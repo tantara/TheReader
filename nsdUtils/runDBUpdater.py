@@ -20,8 +20,12 @@ def runDBUpdater(url):
 
 		threadMap[gameId] = gameUpdater
 
+	print threadMap
+
 	for key in threadMap:
 		updater = threadMap[key]
+		print key
 
 		if not updater.isAlive():
+			print key
 			del threadMap[key]	
