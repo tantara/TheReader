@@ -1,4 +1,4 @@
-import thread
+import threading
 from Broadcast.models import Game
 from nsdUtils.gameUpdater import GameUpdater
 
@@ -13,4 +13,9 @@ def runDBUpdater(url):
 		g = Game(game_id=gameId)
 		g.url = "http://sportsdata.naver.com/ndata//kbo/%s/%s/%s.nsd" % (year, month, gameId)
 		g.save()
-		thread.start_new_thread(GameUpdater, (g,))
+		gameUpdater = threading(target=GameUpdater, args=(g))
+		
+		gameUpdater.start()		
+
+	if not gameUpdater.isAlive():
+		gameUpdater.start()
