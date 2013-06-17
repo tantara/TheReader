@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django_crontab',
     'Broadcast',
     'nsdUtils',
 )
@@ -166,3 +167,7 @@ LOGGING = {
         },
     }
 }
+
+CRONJOBS = [
+		('0 0 * * *', 'TheReader.cron.crawl_games')
+]
